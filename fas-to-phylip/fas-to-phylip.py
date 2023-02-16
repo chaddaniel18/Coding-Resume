@@ -1,11 +1,9 @@
-#  input file location for conversion from fasta (.fas) to phylip (.txt or .phy)
-
-# file = input("enter file location and name: ")
-file = ''
+#  Place input file in same folder as .py file to convert from fasta (.fas) to phylip (.txt or .phy)
+#  File type must be sequential, not interleaved
+file = input("enter file name: ")
 
 if len(file) == 0:
-    file = '/home/chaddaniel18/Desktop/Phylip-data/bioinfomethods1_labs_Lab3,4_sequences_DNA_aligned.fas'
-    # file = '/home/chaddaniel18/Desktop/Phylip-data/copy-paste-from-class.fas'
+    file = 'bioinfomethods1_labs_Lab3,4_sequences_DNA_aligned.fas'
 
 fasta = []
 
@@ -13,9 +11,9 @@ try:
     with open(file) as f:
         for line in f:
             fasta.append(line)
-        print('file location and name valid')
+        print('file name valid')
 except:
-    print('invalid file location and name')
+    print('invalid file name')
     exit()
 
 phylip = ''
@@ -42,7 +40,11 @@ for line in fasta:
 
 
 print(seq_len)
-with open('/home/chaddaniel18/Desktop/Phylip-data/converted-with-py.phy', 'w') as writer:
+save_file_name = input("save file as: ")
+if len(save_file_name) == 0:
+    save_file_name = 'converted-with-py.phy'
+
+with open(save_file_name, 'w') as writer:
     writer.write(str(num_samples) + ' ' + str(len(dna) - 1) + '\n')
     writer.write(phylip)
 
